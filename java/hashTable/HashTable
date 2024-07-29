@@ -1,0 +1,50 @@
+package hashTable;
+
+public interface HashTable<K, V> {
+
+    /**
+     * Inserta un par clave-valor en la tabla de hash.
+     * Si la clave ya existe, actualiza su valor.
+     * @param key la clave con la que se asociará el valor
+     * @param value el valor a asociar con la clave
+     */
+    public void put(K key, V value);
+
+    /**
+     * Recupera el valor asociado a una clave específica.
+     * @param key la clave cuyo valor asociado se desea obtener
+     * @return el valor asociado a la clave, o {@code null} si la clave no está en la tabla
+     */
+    public V get(K key);
+
+    /**
+     * Elimina el par clave-valor asociado a una clave específica.
+     * @param key la clave cuyo par clave-valor se desea eliminar
+     */
+    public void remove(K key);
+
+    /**
+     * Verifica si una clave específica está presente en la tabla de hash.
+     * @param key la clave a verificar
+     * @return {@code true} si la clave está presente en la tabla, {@code false} en caso contrario
+     */
+    public boolean containsKey(K key);
+
+    /**
+     * Devuelve el número de elementos en la tabla de hash.
+     * @return la cantidad de elementos en la tabla
+     */
+    public int size();
+
+    /**
+     * Invariante de clase.
+     * @return {@code true} si la tabla de hash satisface su invariante de clase
+     */
+    public boolean repOK();
+
+    @Override
+    public String toString();
+
+    @Override
+    public boolean equals(Object other);
+}
