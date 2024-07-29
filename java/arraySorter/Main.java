@@ -25,6 +25,11 @@ public class Main {
       System.out.println("Arreglo random, tamaño 20 y valores entre 0 y 100:\n" + Arrays.toString(arreglo));
       ArraySorter.quickSort(arreglo);
       System.out.println("Arreglo ordenado con QuickSort:\n" + Arrays.toString(arreglo));
+
+      Integer[] array = {3, 6, 4, 1, 3, 4, 1, 4};
+      System.out.println("Arreglo random, tamaño 8 y valores entre 1 y 6:\n" + Arrays.toString(array));
+      ArraySorter.countingSort(array, array.length, 6);
+      System.out.println("Arreglo ordenado con counting sort:\n" + Arrays.toString(array));
     }
 
    @SuppressWarnings("unchecked")
