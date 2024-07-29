@@ -161,6 +161,29 @@ public class ArraySorter {
       }
    }
 
+   public static void countingSort(Integer[] array, int n, int k) {
+      int[] c = new int[k+1];
+
+      //contamos la cantidad de elementos iguales a array[i];
+      for (int i = 0; i < n; i++) {
+         c[array[i]]++;
+      }
+
+      //contamos la cantidad de elementos menores o iguales a array[i];
+      for (int i = 1; i<=k; i++) {
+         c[i] = c[i] + c[i-1];
+      }
+      
+      //se coloca cada elemento array[i] en su lugar
+      Integer[] sorted = new Integer[n];
+      for (int j = n-1 ; j >= 0; j-- ) {
+         sorted[c[array[j]]-1] = array[j]; 
+         c[array[j]]--;
+      }
+      
+      System.arraycopy(sorted, 0, array, 0, n);
+   }
+
    /* (non-Javadoc)
    * Este método intercambia dos posiciones de un arreglo.
    */ 
