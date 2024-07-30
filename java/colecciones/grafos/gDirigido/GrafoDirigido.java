@@ -277,9 +277,11 @@ public class GrafoDirigido implements Grafo{
 
     private void dfsRe(Vertice v, List<Vertice> visited) {
         visited.add(v);
-        for (Pair<Vertice,Integer> w : v.getAdyacentes()) {
-            if (!visited.contains(w.getKey())) {
-                dfsRe(w.getKey(),visited);
+        if (v.getAdyacentes() != null) {
+            for (Pair<Vertice,Integer> w : v.getAdyacentes()) {
+                if (!visited.contains(w.getKey())) {
+                    dfsRe(w.getKey(),visited);
+                }
             }
         }
     }
@@ -344,6 +346,36 @@ public class GrafoDirigido implements Grafo{
             }
         }
     }
+
+    /**
+     * 
+     * @param x vertice origen
+     * @param y vertice destino
+     * @return cantidad de caminos simples entre x e y
+     */
+    
+     public int caminosSimples(Vertice x, Vertice y) {
+        List<Vertice> visited = new ArrayList<Vertice>();
+        int cantCaminos = 0;
+       return cantSimplesAux(x, y, visited, cantCaminos);
+     }
+
+     private int cantSimplesAux(Vertice x, Vertice y, List<Vertice> visited, int cantCaminos) {
+        if (x.equals(y)) {
+            return 1;
+        }
+        
+        visited.add(x);
+        if (x.getAdyacentes() != null) {
+            for (Pair<Vertice,Integer> p : x.getAdyacentes()){
+                if (!visited.contains(p.getKey())) {
+                       cantCaminos += cantSimplesAux(p.getKey(), y, visited, cantCaminos) ;
+                }
+            }
+         }
+         //visited.remove(x);
+         return cantCaminos;
+   }
     
     /**
      * Implementacion de warshall-floyd
@@ -365,7 +397,7 @@ public class GrafoDirigido implements Grafo{
         }
         //se considera cada camino pasando por k
         for (int k = 1; k<n; k++) {
-            for (int  i = 0; j<n; j++) {
+            for (int  i = 0; i<n; i++) {
                 for (int j = 0; j<n; j++) {
                     if (dist[i][k] + dist[k][j] < dist[i][j]) {
                         dist[i][j] = dist[i][k] + dist[k][j];
