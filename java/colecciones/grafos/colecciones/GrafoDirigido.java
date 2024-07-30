@@ -284,5 +284,35 @@ public class GrafoDirigido implements Grafo{
 
 
     //Recorrido dfs implementado con pilas
+    public List<Vertice> dfsWithStack(Vertice v) {
+        List<Vertice> visited = new ArrayList<Vertice>();
+        dfsWithStackAux(v, visited);
+        return visited;
+    }
+
+    private void dfsWithStackAux(Vertice v, List<Vertice> visited) {
+        Stack<Vertice> s = new Stack<Vertice>();
+        s.push(v);
+        visited.add(v);
+        while(!s.isEmpty()) {
+            Vertice u = s.peek();
+            Vertice w = getUnvisitedAdj(u,visited);
+            if (w != null) {
+                s.push(w);
+                visited.add(w);
+            }else{
+                s.pop();
+            }
+        }
+    }
+
+    private Vertice getUnvisitedAdj(Vertice v,List<Vertice> visited) {
+        for (Pair<Vertice,Integer> w : v.getAdyacentes()) {
+            if (!visited.contains(w.getKey())){
+                return w.getKey();
+            }
+        }
+        return null;
+    }
 }
 
