@@ -1,4 +1,4 @@
-package grafos.colecciones;
+package grafos.gDirigido;
 import java.util.Collection;
 import java.util.List;
 
