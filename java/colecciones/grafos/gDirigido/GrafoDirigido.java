@@ -356,20 +356,19 @@ public class GrafoDirigido implements Grafo{
     
      public int caminosSimples(Vertice x, Vertice y) {
         List<Vertice> visited = new ArrayList<Vertice>();
-        int cantCaminos = 0;
-       return cantSimplesAux(x, y, visited, cantCaminos);
+       return cantSimplesAux(x, y, visited);
      }
 
-     private int cantSimplesAux(Vertice x, Vertice y, List<Vertice> visited, int cantCaminos) {
+     private int cantSimplesAux(Vertice x, Vertice y, List<Vertice> visited) {
         if (x.equals(y)) {
             return 1;
         }
-        
+        int cantCaminos = 0;
         visited.add(x);
         if (x.getAdyacentes() != null) {
             for (Pair<Vertice,Integer> p : x.getAdyacentes()){
                 if (!visited.contains(p.getKey())) {
-                       cantCaminos += cantSimplesAux(p.getKey(), y, visited, cantCaminos) ;
+                       cantCaminos += cantSimplesAux(p.getKey(), y, visited) ;
                 }
             }
          }
