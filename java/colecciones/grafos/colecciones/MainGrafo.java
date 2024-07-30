@@ -42,6 +42,8 @@ public class MainGrafo {
         // Mostrar la representación del grafo
         System.out.println("Representación del grafo g1:");
         System.out.println(g1.toString());
-        System.out.println("recorrido dfs " + g1.dfs(vA));
+        System.out.println("recorrido dfs recursivo " + g1.dfs(vA));
+        System.out.println("recorrido dfs con stack " + g1.dfsWithStack(vA));
+        System.out.println("recorrido bfs con queue " + g1.bfs(vA));
     }
 }
