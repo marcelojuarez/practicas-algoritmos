@@ -1,9 +1,11 @@
 package grafos.colecciones;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 import java.util.ArrayList;
+import cola.ColaArregloFijo;
 
 /**
  * Clase GrafoDirigido implementada con lista de adyacencias
@@ -283,7 +285,9 @@ public class GrafoDirigido implements Grafo{
     }
 
 
-    //Recorrido dfs implementado con pilas
+    /** 
+     * Recorrido dfs implementado con pilas
+     */
     public List<Vertice> dfsWithStack(Vertice v) {
         List<Vertice> visited = new ArrayList<Vertice>();
         dfsWithStackAux(v, visited);
@@ -314,5 +318,32 @@ public class GrafoDirigido implements Grafo{
         }
         return null;
     }
+    /**
+     * Recorrido bfs usando una queue
+     */
+    public List<Vertice> bfs(Vertice v){
+        List<Vertice> visited = new ArrayList<Vertice>();
+        bfsQueue(v,visited);
+        return visited;
+    }
+
+    private void bfsQueue(Vertice v, List<Vertice> visited) {
+        ColaArregloFijo<Vertice> q = new ColaArregloFijo<Vertice>();
+        q.encolar(v);
+        visited.add(v);
+        
+        while (!q.esVacia()) {
+            Vertice w = q.desencolar();
+            
+            for (Pair<Vertice, Integer> x : w.getAdyacentes()) {
+                Vertice adjVertice = x.getKey(); 
+                if (!visited.contains(adjVertice)) {
+                    visited.add(adjVertice);
+                    q.encolar(adjVertice);
+                }
+            }
+        }
+    }
+    
 }
 
