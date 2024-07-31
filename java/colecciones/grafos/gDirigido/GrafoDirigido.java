@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.ArrayList;
 import cola.ColaArregloFijo;
+import grafos.gDirigido.MainGrafo.MatrixUtils;
 
 /**
  * Clase GrafoDirigido implementada con lista de adyacencias
@@ -382,31 +383,31 @@ public class GrafoDirigido implements Grafo{
      * graph es una matriz conteniendo el grafo, dist es la matriz en donde las distancias se
      * guardaran y path una matriz en donde se guardan los caminos
      */
-    public void warshall(int[][] graph, int[][] dist, int[][] path) {
+    public void warshall(Integer[][] graph, Integer[][] dist, Integer[][] path) {
         int n = graph.length;
         //se inicializa  path y dist
         for (int i = 0; i<n; i++) {
             for (int j = 0; j<n; j++) {
                 dist[i][j] = graph[i][j];
-                path[i][j] = -1;
+                path[i][j] = (-1);
                 if (0 < graph[i][j]  && graph[i][j] < Integer.MAX_VALUE) {
-                    dist[i][j] = i;
+                    path[i][j] = i+1;
                 }
             }
         }
+        MatrixUtils util = new MatrixUtils();
+        System.out.println("distancia antes de ser actualizado \n" + util.toString(path));
         //se considera cada camino pasando por k
-        for (int k = 1; k<n; k++) {
+        for (int k = 0; k<n; k++) {
             for (int  i = 0; i<n; i++) {
                 for (int j = 0; j<n; j++) {
                     if (dist[i][k] + dist[k][j] < dist[i][j]) {
                         dist[i][j] = dist[i][k] + dist[k][j];
-                        path[i][j] = k;
+                        path[i][j] = path[k][j];
                     }    
                 }
             }
         }
-    
-    
     }
 }
 
