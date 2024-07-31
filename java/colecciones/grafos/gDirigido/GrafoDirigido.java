@@ -395,8 +395,6 @@ public class GrafoDirigido implements Grafo{
                 }
             }
         }
-        MatrixUtils util = new MatrixUtils();
-        System.out.println("distancia antes de ser actualizado \n" + util.toString(path));
         //se considera cada camino pasando por k
         for (int k = 0; k<n; k++) {
             for (int  i = 0; i<n; i++) {
