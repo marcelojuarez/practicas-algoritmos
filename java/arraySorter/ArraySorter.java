@@ -29,6 +29,7 @@ public class ArraySorter {
       boolean sorted = false;
       int n = array.length; 
       for (int pass = 1; (pass < n) && !sorted; ++pass) {
+         //inv : array[n-pass] a array[n-1] esta ordenado
          sorted = true;
          for (int index = 0; index < n - pass; ++index) {
             int nextIndex = index + 1;
