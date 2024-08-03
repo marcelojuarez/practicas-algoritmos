@@ -32,6 +32,7 @@ public class ArraySorter {
          //inv : array[n-pass] a array[n-1] esta ordenado
          sorted = true;
          for (int index = 0; index < n - pass; ++index) {
+            //inv: Vi : 0 <= i < index : array[i] <= array[index]
             int nextIndex = index + 1;
             if (array[index].compareTo(array[nextIndex]) > 0) {
                swap(array, index, nextIndex);
@@ -49,6 +50,7 @@ public class ArraySorter {
    public static <T extends Comparable<? super T>> void selectionSort(T[] array) {
       if (array == null) throw new IllegalArgumentException("null array");
       for (int last = array.length-1;last >= 1;last--){
+         //inv: array[last..n-1] esta ordenado
          int largest = indexOfLargest(array,last+1);
          swap(array, last, largest);
       }
@@ -165,23 +167,24 @@ public class ArraySorter {
    public static void countingSort(Integer[] array, int n, int k) {
       int[] c = new int[k+1];
 
-      //contamos la cantidad de elementos iguales a array[i];
-      for (int i = 0; i < n; i++) {
+      //contamos la cantiadad de elementos iguales a array[i]
+      for (int i = 0; i<n; i++) {
          c[array[i]]++;
       }
 
-      //contamos la cantidad de elementos menores o iguales a array[i];
+      //contamos la cantidad de elementos menores o iguales que array[i]
       for (int i = 1; i<=k; i++) {
          c[i] = c[i] + c[i-1];
       }
       
-      //se coloca cada elemento array[i] en su lugar
+      //arreglo auxiliar para realizar el ordenamiento
       Integer[] sorted = new Integer[n];
-      for (int j = n-1 ; j >= 0; j-- ) {
-         sorted[c[array[j]]-1] = array[j]; 
+      //se coloca cada elemento en su lugar
+      for (int j = n-1; j>=0; j--) {
+         sorted[c[array[j]]-1] = array[j];
          c[array[j]]--;
       }
-      
+      //reemplazo el arreglo original
       System.arraycopy(sorted, 0, array, 0, n);
    }
 
