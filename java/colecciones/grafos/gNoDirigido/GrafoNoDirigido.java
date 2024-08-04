@@ -256,4 +256,45 @@ public boolean eliminarVertice(Vertice nodo) {
     return result;
   }
 
+  /**
+   * Algoritmo para detectar si un grafo no tiene ciclos
+   * Basado en dfs
+   */
+
+   public boolean hayCiclos(Vertice v) {
+    List<Vertice> visited = new ArrayList<>();
+    return hayCiclosAux(v,visited,null);
+   }
+
+   private boolean hayCiclosAux(Vertice v, List<Vertice> visited, Vertice parent) {
+    visited.add(v);
+    for (Vertice w : v.getAdyacentes()) {
+      if (!visited.contains(w)) {
+        if (hayCiclosAux(w, visited, v)) {
+          return true;
+        }
+      }else if (w != parent) {
+        return true;
+      }
+      }
+      return false;
+    }
+  
+
+   public boolean esArbol(Vertice v) {
+    List<Vertice> visited = new ArrayList<>();
+    if (hayCiclosAux(v, visited, null)) {
+      return false;
+    }
+    if (this.cantidadVertices() != visited.size()) {
+      return false;
+    }
+
+    if (this.cantArist + 1 == this.cantidadVertices()) {
+      return false;
+    }
+
+    return true;
+   }
+
 }
