@@ -1,14 +1,14 @@
-package colecciones.arbol;
+package arbol;
 
-public interface HEAP {
+public interface Heap {
     // Inserta un elemento en el heap
-    void insert(int value);
+    void insert(Integer value);
 
     // Extrae el elemento superior del heap
-    int extracTop() throws IllegalStateException;
+    Integer extracTop() throws IllegalStateException;
 
     // Retorna el elemento superior del heap sin extraerlo
-    int peekTop() throws IllegalStateException;
+    Integer peekTop() throws IllegalStateException;
 
     // Retorna el tamaño actual del heap
     int size();
